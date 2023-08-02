@@ -1,33 +1,35 @@
 import { useState } from 'preact/hooks'
-import preactLogo from './assets/preact.svg'
-import viteLogo from '/vite.svg'
 import './app.css'
+import { getTwitchClient, connect, onMessage, disconnect } from '../utils/twitchConnection'
 
 export function App() {
-  const [count, setCount] = useState(0)
+  const [channelName, setChannelName] = useState('rothiotome')
+  const [twitchClient, setTwitchClient] = useState(null)
 
+  const handleConnectClick = () => {
+    const client = getTwitchClient(channelName)
+    connect(client)
+    onMessage(client, (channel, user, message, self) => {
+      console.log(user.username, message)
+    })
+    setTwitchClient(client)
+    console.log('Connected')
+  }
+
+  const handleDisconnectClick = () => {
+    disconnect(twitchClient)
+    console.log('Disconnected')
+  }
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} class="logo" alt="Vite logo" />
-        </a>
-        <a href="https://preactjs.com" target="_blank">
-          <img src={preactLogo} class="logo preact" alt="Preact logo" />
-        </a>
-      </div>
-      <h1>Vite + Preact</h1>
-      <div class="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+      <h1>Numerica Combo Game</h1>
+      <input type="text" value={channelName} onChange={(e) => setChannelName(e.target.value)} />
+        <button onClick={handleConnectClick}>
+          Connect to Twitch
         </button>
-        <p>
-          Edit <code>src/app.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p class="read-the-docs">
-        Click on the Vite and Preact logos to learn more
-      </p>
+        <button onClick={handleDisconnectClick}>
+          Disconnect from Twitch
+        </button>
     </>
   )
 }
