@@ -1,5 +1,7 @@
 export const Numerica = ({ value }) => {
   return (
-    <div>{value}</div>
+    <div>
+      <span className='text-3xl text-red-500'>{value}</span>
+    </div>
   )
 }

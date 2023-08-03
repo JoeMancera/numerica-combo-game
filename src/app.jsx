@@ -46,7 +46,7 @@ export function App() {
 
   return (
     <main>
-      <h1>Numerica Combo Game</h1>
+      <h1 className='text-red-600'>Numerica Combo Game</h1>
       <div>Current Message: {currentMessage}</div>
       <div>Current Number: {currentNumber}</div>
       <div>Current Combo: {currentCombo}</div>
