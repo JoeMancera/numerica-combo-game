@@ -1,4 +1,4 @@
-export default function Numerica({ value }) {
+export const Numerica = ({ value }) => {
   return (
     <div>{value}</div>
   )
