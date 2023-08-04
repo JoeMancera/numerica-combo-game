@@ -1,8 +1,10 @@
-import { useState, useEffect } from 'preact/hooks'
+import { useState } from 'preact/hooks'
 import './app.css'
 import { getTwitchClient, connect, onMessage, disconnect } from '../utils/twitchConnection'
 import { Game } from './components/game'
 import { InitialConfiguration } from './components/initial-configuration'
+
+const isDebugMode = false
 
 export function App() {
   const [channelName, setChannelName] = useState('rothiotome')
@@ -32,9 +34,7 @@ export function App() {
     console.log('Disconnected')
   }
 
-  useEffect(() => {
-    if (!isConnected) return
-
+  if(isConnected){
     onMessage(twitchClient, (channel, user, message, self) => {
       console.log(user.username, message)
       setCurrentMessage(message)
@@ -42,15 +42,16 @@ export function App() {
       setCurrentCombo(currentCombo + 1)
       setCurrentUser(user.username)
     })
-  }, [isConnected, currentMessage])
+  }
 
   return (
     <main>
-      <h1 className='text-red-600'>Numerica Combo Game</h1>
-      <div>Current Message: {currentMessage}</div>
-      <div>Current Number: {currentNumber}</div>
-      <div>Current Combo: {currentCombo}</div>
-      <div>Current User: {currentUser}</div>
+      {isDebugMode && <>
+        <div>Current Message: {currentMessage}</div>
+        <div>Current Number: {currentNumber}</div>
+        <div>Current Combo: {currentCombo}</div>
+        <div>Current User: {currentUser}</div>
+      </>}
       {!isConnected && <InitialConfiguration channelName={channelName} setChannelName={setChannelName} handleConnectClick={handleConnectClick} />}
       {isConnected && <Game value={currentNumber} handleDisconnectClick={handleDisconnectClick} />}
     </main>

@@ -3,19 +3,7 @@
 @tailwind utilities;
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+  font-family: "Press Start 2P", cursive;
 }
 
 body {
@@ -24,4 +12,63 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #f3f4f6;
+  color: #1f2937;
+}
+
+/* Default style */
+button {
+  position: relative;
+  display: inline-block;
+  padding: 6px 8px;
+  margin: 2px;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border-left: 3px solid;
+  border-top: 3px solid;
+  border-right: 3px solid;
+  border-bottom: 3px solid;
+  border-style: outset;
+}
+
+button:hover {
+  text-decoration: none;
+  filter: invert(.15);
+  border-style: inset;
+}
+
+button:focus {
+  text-decoration: none;
+  filter: invert(.15);
+  border-style: inset;
+  outline: none;
+}
+
+input {
+  position: relative;
+  display: inline-block;
+  padding: 6px 8px;
+  margin: 2px;
+  text-align: center;
+  vertical-align: middle;
+  border-left: 3px solid;
+  border-top: 3px solid;
+  border-right: 3px solid;
+  border-bottom: 3px solid;
+  border-style: outset;
+  outline: none;
+}
+
+input:hover {
+  text-decoration: none;
+  border-style: inset;
+}
+
+input:focus {
+  text-decoration: none;
+  border-style: inset;
 }
