@@ -12,8 +12,8 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #f3f4f6;
-  color: #1f2937;
+  background-color: #1f2937;
+  color: #f3f4f6;
 }
 
 /* Default style */
