@@ -1,38 +1,28 @@
-import { useState } from 'preact/hooks'
 import './app.css'
-import { getTwitchClient, connect, onMessage, disconnect } from '../utils/twitchConnection'
+import { onMessage } from '../utils/twitchConnection'
 import { Game } from './components/game'
 import { InitialConfiguration } from './components/initial-configuration'
+import { useNumerica } from './hooks/use-numerica'
 
 const isDebugMode = false
 
 export function App() {
-  const [channelName, setChannelName] = useState('rothiotome')
-  const [twitchClient, setTwitchClient] = useState(null)
-  const [isConnected, setIsConnected] = useState(false)
-
-  const [currentMessage, setCurrentMessage] = useState('')
-  const [currentNumber, setCurrentNumber] = useState(0)
-  const [currentCombo, setCurrentCombo] = useState(0)
-  const [currentUser, setCurrentUser] = useState('')
-
-  const handleConnectClick = () => {
-    const client = getTwitchClient(channelName)
-    connect(client)
-    setTwitchClient(client)
-    setIsConnected(true)
-    console.log('Connected')
-  }
-
-  const handleDisconnectClick = () => {
-    disconnect(twitchClient)
-    setIsConnected(false)
-    setCurrentMessage('')
-    setCurrentNumber(0)
-    setCurrentCombo(0)
-    setCurrentUser('')
-    console.log('Disconnected')
-  }
+  const {
+    channelName,
+    twitchClient,
+    isConnected,
+    currentMessage,
+    currentNumber,
+    currentCombo,
+    currentUser,
+    handleDisconnectClick,
+    handleConnectClick,
+    setCurrentMessage,
+    setChannelName,
+    setCurrentNumber,
+    setCurrentCombo,
+    setCurrentUser
+  } = useNumerica()
 
   if(isConnected){
     onMessage(twitchClient, (channel, user, message, self) => {
@@ -45,7 +35,7 @@ export function App() {
   }
 
   return (
-    <main>
+    <main classNam="">
       {isDebugMode && <>
         <div>Current Message: {currentMessage}</div>
         <div>Current Number: {currentNumber}</div>
