@@ -63,12 +63,12 @@ input {
   outline: none;
 }
 
-input:hover {
+input:focus {
   text-decoration: none;
   border-style: inset;
 }
 
-input:focus {
-  text-decoration: none;
-  border-style: inset;
+
+.stroke {
+  -webkit-text-stroke: .5px #fff;
 }
