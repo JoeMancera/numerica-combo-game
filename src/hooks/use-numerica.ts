@@ -1,9 +1,9 @@
-import { useState } from 'preact/hooks'
-import { getTwitchClient, connect, disconnect } from '../../utils/twitchConnection'
+import { useEffect, useState } from 'preact/hooks'
+import { getTwitchClient, connect, disconnect } from '../../utils/twitch-connection'
 
 
-export const useNumerica = () => {
-  const [channelName, setChannelName] = useState('rothiotome')
+export const useNumerica = ({channel, isConnect}: {channel?: string, isConnect: boolean})  => {
+  const [channelName, setChannelName] = useState<string>(channel ?? 'rothiotome')
   const [twitchClient, setTwitchClient] = useState({})
   const [isConnected, setIsConnected] = useState(false)
 
@@ -29,6 +29,12 @@ export const useNumerica = () => {
     setCurrentUser('')
     console.log('Disconnected')
   }
+
+  useEffect(() => {
+    if (isConnect) {
+      handleConnectClick()
+    }
+  }, [isConnected])
 
   return {
     channelName,

@@ -1,5 +1,7 @@
+import { useRoute } from "wouter"
+
 import './app.css'
-import { onMessage } from '../utils/twitchConnection'
+import { onMessage } from '../utils/twitch-connection'
 import { Game } from './components/game'
 import { InitialConfiguration } from './components/initial-configuration'
 import { useNumerica } from './hooks/use-numerica'
@@ -7,6 +9,9 @@ import { useNumerica } from './hooks/use-numerica'
 const isDebugMode = false
 
 export function App() {
+  const [match, params] = useRoute("/channel/:channelName")
+  console.log(match, params)
+  
   const {
     channelName,
     twitchClient,
@@ -22,7 +27,7 @@ export function App() {
     setCurrentNumber,
     setCurrentCombo,
     setCurrentUser
-  } = useNumerica()
+  } = useNumerica({ channelName: params?.channelName, isConnect: match})
 
   if(isConnected){
     onMessage(twitchClient, (channel, user, message, self) => {

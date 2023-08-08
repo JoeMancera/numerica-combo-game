@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "preact": "10.16.0",
-    "tmi.js": "1.8.5"
+    "tmi.js": "1.8.5",
+    "wouter": "^2.11.0"
   },
   "devDependencies": {
     "@preact/preset-vite": "2.5.0",
