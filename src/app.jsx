@@ -5,6 +5,7 @@ import { onMessage } from '../utils/twitch-connection'
 import { Game } from './components/game'
 import { InitialConfiguration } from './components/initial-configuration'
 import { useNumerica } from './hooks/use-numerica'
+import { setHighScore } from '../utils/numerica-logic'
 
 const isDebugMode = false
 
@@ -25,7 +26,7 @@ export function App() {
     setChannelName,
     setCurrentNumber,
     setCurrentCombo,
-    setCurrentUser
+    setCurrentUser,
   } = useNumerica(params?.channelName)
 
   if(isConnected){
@@ -35,6 +36,7 @@ export function App() {
       setCurrentNumber(currentNumber + 1)
       setCurrentCombo(currentCombo + 1)
       setCurrentUser(user.username)
+      setHighScore(currentNumber + 1)
     })
   }
 
@@ -47,7 +49,7 @@ export function App() {
         <div>Current User: {currentUser}</div>
       </>}
       {!isConnected && <InitialConfiguration channelName={channelName} setChannelName={setChannelName} handleConnectClick={handleConnectClick} />}
-      {isConnected && <Game value={currentNumber} showStopGame={!match} handleDisconnectClick={handleDisconnectClick} />}
+      {isConnected && <Game value={currentNumber} user={currentUser} showStopGame={!match} handleDisconnectClick={handleDisconnectClick} />}
     </main>
   )
 }
