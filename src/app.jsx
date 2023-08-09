@@ -10,7 +10,6 @@ const isDebugMode = false
 
 export function App() {
   const [match, params] = useRoute("/channel/:channelName")
-  console.log(match, params)
   
   const {
     channelName,
@@ -27,7 +26,7 @@ export function App() {
     setCurrentNumber,
     setCurrentCombo,
     setCurrentUser
-  } = useNumerica({ channelName: params?.channelName, isConnect: match})
+  } = useNumerica(params?.channelName)
 
   if(isConnected){
     onMessage(twitchClient, (channel, user, message, self) => {
@@ -48,7 +47,7 @@ export function App() {
         <div>Current User: {currentUser}</div>
       </>}
       {!isConnected && <InitialConfiguration channelName={channelName} setChannelName={setChannelName} handleConnectClick={handleConnectClick} />}
-      {isConnected && <Game value={currentNumber} handleDisconnectClick={handleDisconnectClick} />}
+      {isConnected && <Game value={currentNumber} showStopGame={!match} handleDisconnectClick={handleDisconnectClick} />}
     </main>
   )
 }

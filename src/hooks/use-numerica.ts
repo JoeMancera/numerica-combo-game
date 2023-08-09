@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'preact/hooks'
+import { useLocation } from "wouter"
 import { getTwitchClient, connect, disconnect } from '../../utils/twitch-connection'
 
 
-export const useNumerica = ({channel, isConnect}: {channel?: string, isConnect: boolean})  => {
+export const useNumerica = (channel?: string)  => {
+  const [_, setLocation] = useLocation()
   const [channelName, setChannelName] = useState<string>(channel ?? 'rothiotome')
   const [twitchClient, setTwitchClient] = useState({})
   const [isConnected, setIsConnected] = useState(false)
@@ -21,6 +23,7 @@ export const useNumerica = ({channel, isConnect}: {channel?: string, isConnect: 
   }
 
   const handleDisconnectClick = () => {
+    setLocation('/')
     disconnect(twitchClient)
     setIsConnected(false)
     setCurrentMessage('')
@@ -31,10 +34,14 @@ export const useNumerica = ({channel, isConnect}: {channel?: string, isConnect: 
   }
 
   useEffect(() => {
-    if (isConnect) {
-      handleConnectClick()
+    if (channel) {
+      const client = getTwitchClient(channelName)
+      connect(client)
+      setTwitchClient(client)
+      setIsConnected(true)
+      console.log('Connected')
     }
-  }, [isConnected])
+  }, [])
 
   return {
     channelName,
