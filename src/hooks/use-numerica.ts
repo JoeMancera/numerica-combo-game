@@ -11,7 +11,7 @@ export const useNumerica = (channel?: string)  => {
 
   const [currentMessage, setCurrentMessage] = useState('')
   const [currentNumber, setCurrentNumber] = useState(0)
-  const [currentCombo, setCurrentCombo] = useState(0)
+  const [currentCombo, setCurrentCombo] = useState(1)
   const [currentUser, setCurrentUser] = useState('')
 
   const handleConnectClick = () => {
@@ -28,7 +28,7 @@ export const useNumerica = (channel?: string)  => {
     setIsConnected(false)
     setCurrentMessage('')
     setCurrentNumber(0)
-    setCurrentCombo(0)
+    setCurrentCombo(1)
     setCurrentUser('')
     console.log('Disconnected')
   }

@@ -34,7 +34,9 @@ export function App() {
       console.log(user.username, message)
       setCurrentMessage(message)
       setCurrentNumber(currentNumber + 1)
-      setCurrentCombo(currentCombo + 1)
+      if(currentNumber + 1 > 10){
+        setCurrentCombo(currentCombo + 1)
+      }
       setCurrentUser(user.username)
       setHighScore(currentNumber + 1, user.username)
     })
@@ -49,7 +51,7 @@ export function App() {
         <div>Current User: {currentUser}</div>
       </>}
       {!isConnected && <InitialConfiguration channelName={channelName} setChannelName={setChannelName} handleConnectClick={handleConnectClick} />}
-      {isConnected && <Game value={currentNumber} user={currentUser} showStopGame={!match} handleDisconnectClick={handleDisconnectClick} />}
+      {isConnected && <Game value={currentNumber} user={currentUser} showStopGame={!match} handleDisconnectClick={handleDisconnectClick} combo={currentCombo} />}
     </main>
   )
 }

@@ -43,21 +43,3 @@ export const highScoreUser = (): string | null => {
   const highScoreUser = sessionStorage.getItem('x-highScore-numerica-user')
   return highScoreUser ? highScoreUser :null
 }
-
-// la funcion isComboTime valida si dentro del los 5 segundos siguientes se enviaron más de 10 mensajes
-// esto para aumentar en uno el combo
-// export const isComboTime = (currentCombo: number, currentNumber: number, messages: string[]) => {
-//   const comboTime = 5
-//   const comboLimit = 10
-//   const comboTimeLimit = comboTime * 1000
-//   const now = new Date()
-//   const messagesTime = messages.map((message) => {
-//     const parsed = JSON.parse(message)
-//     return parsed.time
-//   })
-//   const messagesTimeFiltered = messagesTime.filter((time) => {
-//     const timeDiff = now.getTime() - time
-//     return timeDiff <= comboTimeLimit
-//   })
-//   return messagesTimeFiltered.length >= comboLimit
-// }
