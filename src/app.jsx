@@ -36,7 +36,7 @@ export function App() {
       setCurrentNumber(currentNumber + 1)
       setCurrentCombo(currentCombo + 1)
       setCurrentUser(user.username)
-      setHighScore(currentNumber + 1)
+      setHighScore(currentNumber + 1, user.username)
     })
   }
 

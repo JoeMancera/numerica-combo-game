@@ -16,16 +16,34 @@ export const nextCombo = (currentCombo: number) => {
   return currentCombo + 1
 }
 
-export const setHighScore = (currentNumber: number) => {
-  const prevHigScore = sessionStorage.getItem('x-highScore-numerica')
-  const highScore = prevHigScore ? Math.max(parseInt(prevHigScore), currentNumber) : currentNumber
-  sessionStorage.setItem('x-highScore-numerica', String(highScore) ?? '0')
+export const setHighScore = (currentNumber: number, username: string) => {
+  const prevHighScore = sessionStorage.getItem('x-highScore-numerica')
+  const highScore = prevHighScore ? Math.max(parseInt(prevHighScore), currentNumber) : currentNumber
+
+  if(highScore === currentNumber) {
+    saveHighScore(highScore)
+    saveHighScoreUser(username)
+  }
+}
+
+export const saveHighScore = (newHightScore: number) => {
+  sessionStorage.setItem('x-highScore-numerica', String(newHightScore))
+}
+
+export const saveHighScoreUser = (user: string) => {
+  sessionStorage.setItem('x-highScore-numerica-user', user)
 }
 
 export const highScore = (): number => {
   const highScore = sessionStorage.getItem('x-highScore-numerica')
   return highScore ? parseInt(highScore) : 0
 }
+
+export const highScoreUser = (): string | null => {
+  const highScoreUser = sessionStorage.getItem('x-highScore-numerica-user')
+  return highScoreUser ? highScoreUser :null
+}
+
 // la funcion isComboTime valida si dentro del los 5 segundos siguientes se enviaron más de 10 mensajes
 // esto para aumentar en uno el combo
 // export const isComboTime = (currentCombo: number, currentNumber: number, messages: string[]) => {

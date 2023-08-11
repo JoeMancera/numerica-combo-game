@@ -3,10 +3,11 @@ import { Button } from './button'
 
 export const Game = ({value, user, showStopGame, handleDisconnectClick}) => {
   const highScore = sessionStorage.getItem('x-highScore-numerica')
+  const highScoreUser = sessionStorage.getItem('x-highScore-numerica-user')
   
   return (
     <section className='flex flex-col justify-center'>
-      <span>High Score {parseInt(highScore) ?? 0}</span>
+      <span>High Score {parseInt(highScore) ?? 0} by {highScoreUser}</span>
       <Numerica value={value} />
       {user ? <span className="pl-2 text-orange-400">{user}</span> : <span className="pl-2 text-orange-400">
         Let's go!
