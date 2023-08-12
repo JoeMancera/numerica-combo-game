@@ -6,9 +6,7 @@ import { onMessage, removeMessageListener } from '../utils/twitch-connection'
 import { Game } from './components/game'
 import { InitialConfiguration } from './components/initial-configuration'
 import { useNumerica } from './hooks/use-numerica'
-import { setHighScore, isMessageNumeric, messageToNumber } from '../utils/numerica-logic'
-
-const isDebugMode = false
+import { setHighScore, isMessageNumeric, messageToNumber, nextNumber } from '../utils/numerica-logic'
 
 export function App() {
   const [match, params] = useRoute("/channel/:channelName")
@@ -16,31 +14,34 @@ export function App() {
   const {
     channelName,
     twitchClient,
-    isConnected,
-    currentMessage,
     currentNumber,
     currentCombo,
     currentUser,
+    userGameOver,
     handleDisconnectClick,
     handleConnectClick,
-    setCurrentMessage,
     setChannelName,
     setCurrentNumber,
     setCurrentCombo,
     setCurrentUser,
+    setUserGameOver,
   } = useNumerica(params?.channelName)
 
   const handleNewMessage = (channel, user, message, self) => {
-    console.log(user.username, message)
-    setCurrentMessage(message)
-
+console.log('handleNewMessage', channel, user, message, self)
     if(!isMessageNumeric(message)) return
     
     const hit = messageToNumber(message)
-    if(hit === currentNumber + 1){
+    if(hit === nextNumber(currentNumber, currentCombo)){
       setCurrentNumber(hit)
       setCurrentUser(user.username)
       setHighScore(currentNumber + 1, user.username)
+      setUserGameOver(null)
+    } else {
+      setCurrentNumber(0)
+      setCurrentCombo(1)
+      setCurrentUser('')
+      setUserGameOver(user.username)
     }
   }
 
@@ -54,14 +55,16 @@ export function App() {
 
   return (
     <main classNam="">
-      {isDebugMode && <>
-        <div>Current Message: {currentMessage}</div>
-        <div>Current Number: {currentNumber}</div>
-        <div>Current Combo: {currentCombo}</div>
-        <div>Current User: {currentUser}</div>
-      </>}
-      {!isConnected && <InitialConfiguration channelName={channelName} setChannelName={setChannelName} handleConnectClick={handleConnectClick} />}
-      {isConnected && <Game value={currentNumber} user={currentUser} showStopGame={!match} handleDisconnectClick={handleDisconnectClick} combo={currentCombo} />}
+      {!twitchClient && <InitialConfiguration channelName={channelName} setChannelName={setChannelName} handleConnectClick={handleConnectClick} />}
+      {twitchClient && (
+        <Game 
+          value={currentNumber} 
+          user={currentUser} 
+          showStopGame={!match} 
+          combo={currentCombo} 
+          userGameOver={userGameOver}
+          handleDisconnectClick={handleDisconnectClick} 
+        />)}
     </main>
   )
 }

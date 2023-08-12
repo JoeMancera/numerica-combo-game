@@ -8,29 +8,27 @@ export const useNumerica = (channel?: string)  => {
   const [_, setLocation] = useLocation()
   const [channelName, setChannelName] = useState<string>(channel ?? 'rothiotome')
   const [twitchClient, setTwitchClient] = useState<tmi.Client | null>(null)
-  const [isConnected, setIsConnected] = useState(false)
 
-  const [currentMessage, setCurrentMessage] = useState('')
   const [currentNumber, setCurrentNumber] = useState(0)
   const [currentCombo, setCurrentCombo] = useState(1)
-  const [currentUser, setCurrentUser] = useState('')
+  const [currentUser, setCurrentUser] = useState<string | null>(null)
+  const [userGameOver, setUserGameOver] = useState<string | null>(null)
 
   const handleConnectClick = () => {
     const client = getTwitchClient(channelName)
     connect(client)
     setTwitchClient(client)
-    setIsConnected(true)
     console.log('Connected')
   }
 
   const handleDisconnectClick = () => {
     setLocation('/')
     disconnect(twitchClient)
-    setIsConnected(false)
-    setCurrentMessage('')
     setCurrentNumber(0)
     setCurrentCombo(1)
     setCurrentUser('')
+    setUserGameOver(null)
+    setTwitchClient(null)
     console.log('Disconnected')
   }
 
@@ -39,7 +37,6 @@ export const useNumerica = (channel?: string)  => {
       const client = getTwitchClient(channelName)
       connect(client)
       setTwitchClient(client)
-      setIsConnected(true)
       console.log('Connected')
     }
   }, [channel])
@@ -47,17 +44,16 @@ export const useNumerica = (channel?: string)  => {
   return {
     channelName,
     twitchClient,
-    isConnected,
-    currentMessage,
     currentNumber,
     currentCombo,
     currentUser,
+    userGameOver,
     handleDisconnectClick,
     handleConnectClick,
-    setCurrentMessage,
     setChannelName,
     setCurrentNumber,
     setCurrentCombo,
     setCurrentUser,
+    setUserGameOver,
   }
 }
