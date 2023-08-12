@@ -51,6 +51,11 @@ export function App() {
       setCurrentUser(user.username)
       setHighScore(currentNumber + currentCombo, user.username)
       setUserGameOver(null)
+      if(isEndCombo()) {
+        setCurrentCombo(1)
+      } else {
+        saveComboDate()
+      }
     } else {
       setCurrentNumber(0)
       setCurrentCombo(1)

@@ -55,8 +55,9 @@ export const saveComboDate = () => {
 }
 
 export const isEndCombo = () => {
+  const COMBO_TIME = 5000
   const comboDate = sessionStorage.getItem('x-combo-numerica-date')
   const now = new Date().getTime()
   const diff = now - parseInt(comboDate || '0')
-  return diff > 5000
+  return diff > COMBO_TIME
 }
