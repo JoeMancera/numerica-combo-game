@@ -1,8 +1,8 @@
 import { comboMessageList } from './common'
 
 export const isMessageNumeric = (message: string) => {
-  const parsed = parseInt(message)
-  return !isNaN(parsed)
+  const parsed = Number(message)
+  return !isNaN(parsed) && isFinite(parsed)
 }
 
 export const messageToNumber = (message: string) => {
