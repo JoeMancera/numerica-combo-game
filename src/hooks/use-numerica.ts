@@ -1,3 +1,4 @@
+import tmi from 'tmi.js'
 import { useEffect, useState } from 'preact/hooks'
 import { useLocation } from "wouter"
 import { getTwitchClient, connect, disconnect } from '../../utils/twitch-connection'
@@ -6,7 +7,7 @@ import { getTwitchClient, connect, disconnect } from '../../utils/twitch-connect
 export const useNumerica = (channel?: string)  => {
   const [_, setLocation] = useLocation()
   const [channelName, setChannelName] = useState<string>(channel ?? 'rothiotome')
-  const [twitchClient, setTwitchClient] = useState({})
+  const [twitchClient, setTwitchClient] = useState<tmi.Client | null>(null)
   const [isConnected, setIsConnected] = useState(false)
 
   const [currentMessage, setCurrentMessage] = useState('')
@@ -41,7 +42,7 @@ export const useNumerica = (channel?: string)  => {
       setIsConnected(true)
       console.log('Connected')
     }
-  }, [])
+  }, [channel])
 
   return {
     channelName,
@@ -57,6 +58,6 @@ export const useNumerica = (channel?: string)  => {
     setChannelName,
     setCurrentNumber,
     setCurrentCombo,
-    setCurrentUser
+    setCurrentUser,
   }
 }

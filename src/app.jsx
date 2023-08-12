@@ -1,11 +1,12 @@
+import { useEffect } from 'preact/hooks'
 import { useRoute } from "wouter"
 
 import './app.css'
-import { onMessage } from '../utils/twitch-connection'
+import { onMessage, removeMessageListener } from '../utils/twitch-connection'
 import { Game } from './components/game'
 import { InitialConfiguration } from './components/initial-configuration'
 import { useNumerica } from './hooks/use-numerica'
-import { setHighScore } from '../utils/numerica-logic'
+import { setHighScore, isMessageNumeric, messageToNumber } from '../utils/numerica-logic'
 
 const isDebugMode = false
 
@@ -29,18 +30,27 @@ export function App() {
     setCurrentUser,
   } = useNumerica(params?.channelName)
 
-  if(isConnected){
-    onMessage(twitchClient, (channel, user, message, self) => {
-      console.log(user.username, message)
-      setCurrentMessage(message)
-      setCurrentNumber(currentNumber + 1)
-      if(currentNumber + 1 > 10){
-        setCurrentCombo(currentCombo + 1)
-      }
+  const handleNewMessage = (channel, user, message, self) => {
+    console.log(user.username, message)
+    setCurrentMessage(message)
+
+    if(!isMessageNumeric(message)) return
+    
+    const hit = messageToNumber(message)
+    if(hit === currentNumber + 1){
+      setCurrentNumber(hit)
       setCurrentUser(user.username)
       setHighScore(currentNumber + 1, user.username)
-    })
+    }
   }
+
+  useEffect(() => {
+    if (!twitchClient) return
+    onMessage(twitchClient, handleNewMessage)
+    return () => {
+      removeMessageListener(twitchClient, handleNewMessage)
+    }
+  }, [twitchClient, handleNewMessage])
 
   return (
     <main classNam="">

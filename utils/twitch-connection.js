@@ -23,3 +23,6 @@ export const onMessage = (client, callback) => {
   client.on('message', callback)
 }
 
+export const removeMessageListener = (client, callback) => {
+  client.removeListener("message", callback)
+}
