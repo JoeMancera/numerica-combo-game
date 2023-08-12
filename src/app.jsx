@@ -62,6 +62,7 @@ export function App() {
       setCurrentCombo(1)
       setCurrentUser('')
       setUserGameOver(user.username)
+      saveComboUser('')
     }
   }
 
