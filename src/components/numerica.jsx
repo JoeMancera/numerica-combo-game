@@ -11,7 +11,7 @@ export const Numerica = ({ value, combo }) => {
         {value}
       </span>
       <Combo value={combo} />
-      <span className={`${animationCombo ? 'inline rotate-center' : 'hidden'} absolute left-1/2 -rotate-45 text-cyan-300 text-lg stroke-dark`}>Combo</span>
+      <span className={`${animationCombo && combo !== 1 ? 'inline rotate-center' : 'hidden'} absolute left-1/2 -rotate-45 text-cyan-300 text-lg stroke-dark`}>Combo</span>
     </div>
   )
 }
