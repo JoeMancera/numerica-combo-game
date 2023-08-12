@@ -49,3 +49,14 @@ export const highScoreUser = (): string | null => {
 export const isComboMessage = (message: string) => {
   return comboMessageList.includes(message)
 }
+
+export const saveComboDate = () => {
+  sessionStorage.setItem('x-combo-numerica-date', String(new Date().getTime()))
+}
+
+export const isEndCombo = () => {
+  const comboDate = sessionStorage.getItem('x-combo-numerica-date')
+  const now = new Date().getTime()
+  const diff = now - parseInt(comboDate || '0')
+  return diff > 5000
+}

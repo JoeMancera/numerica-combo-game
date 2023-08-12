@@ -6,7 +6,15 @@ import { onMessage, removeMessageListener } from '../utils/twitch-connection'
 import { Game } from './components/game'
 import { InitialConfiguration } from './components/initial-configuration'
 import { useNumerica } from './hooks/use-numerica'
-import { setHighScore, isMessageNumeric, messageToNumber, nextNumber, isComboMessage } from '../utils/numerica-logic'
+import { 
+  setHighScore, 
+  isMessageNumeric, 
+  messageToNumber, 
+  nextNumber, 
+  isComboMessage,
+  saveComboDate,
+  isEndCombo
+} from '../utils/numerica-logic'
 
 export function App() {
   const [match, params] = useRoute("/channel/:channelName")
@@ -32,6 +40,7 @@ export function App() {
     if(!isMessageNumeric(message)) {
       if(isComboMessage(message)) {
         setCurrentCombo(currentCombo + 1)
+        saveComboDate()
       }
       return
     }
@@ -40,7 +49,7 @@ export function App() {
     if(hit === nextNumber(currentNumber, currentCombo)){
       setCurrentNumber(hit)
       setCurrentUser(user.username)
-      setHighScore(currentNumber + 1, user.username)
+      setHighScore(currentNumber + currentCombo, user.username)
       setUserGameOver(null)
     } else {
       setCurrentNumber(0)
