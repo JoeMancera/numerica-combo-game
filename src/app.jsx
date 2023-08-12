@@ -28,8 +28,7 @@ export function App() {
   } = useNumerica(params?.channelName)
 
   const handleNewMessage = (channel, user, message, self) => {
-console.log('handleNewMessage', message, self)
-console.log(isMessageNumeric(message))
+
     if(!isMessageNumeric(message)) {
       if(isComboMessage(message)) {
         setCurrentCombo(currentCombo + 1)
