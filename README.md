@@ -4,7 +4,7 @@
 Una versión del [juego original](https://github.com/rothiotome/numerica-twitch) de @rothiotome
 para jugar en el chat de Twitch. Basado en el [código](https://github.com/JavierBalonga/numerica-game) de @altaskur
 
-## ¿Cómo jugar?
+## 🎮 ¿Cómo jugar?
 
 ¿Te encantó el numerica original? ¿Te gustaría una versión en donde no solo puedas sumar uno a uno, sino que también puedas sumar dos, tres, cuatro o más números? ¡Entonces este es tu versión del juego!
 
@@ -14,7 +14,7 @@ Existen emotes en donde puedes agregar un Combo al siguiente número. Por ejempl
 
 Con esto se incrementará el HightScore más rápido. Pero ojo, no dura mucho tiempo. Así que date prisa y suma muchos puntos.
 
-## ¿Como configurar?
+## 🔧 ¿Como configurar?
 
 Para configurar el juego tienes dos opciones accediendo desde [la web](https://numerica-combo-game.vercel.app/).
 
