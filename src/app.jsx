@@ -13,7 +13,9 @@ import {
   nextNumber, 
   isComboMessage,
   saveComboDate,
-  isEndCombo
+  isEndCombo,
+  saveComboUser,
+  isSamePreviousUserCombo
 } from '../utils/numerica-logic'
 
 export function App() {
@@ -38,9 +40,10 @@ export function App() {
   const handleNewMessage = (channel, user, message, self) => {
 
     if(!isMessageNumeric(message)) {
-      if(isComboMessage(message)) {
+      if(isComboMessage(message) && !isSamePreviousUserCombo(user.username)) {
         setCurrentCombo(currentCombo + 1)
         saveComboDate()
+        saveComboUser(user.username)
       }
       return
     }
@@ -53,8 +56,6 @@ export function App() {
       setUserGameOver(null)
       if(isEndCombo()) {
         setCurrentCombo(1)
-      } else {
-        saveComboDate()
       }
     } else {
       setCurrentNumber(0)

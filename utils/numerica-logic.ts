@@ -54,6 +54,15 @@ export const saveComboDate = () => {
   sessionStorage.setItem('x-combo-numerica-date', String(new Date().getTime()))
 }
 
+export const saveComboUser = (user: string) => {
+  sessionStorage.setItem('x-combo-numerica-user', user)
+}
+
+export const isSamePreviousUserCombo = (user: string) => {
+  const prevUser = sessionStorage.getItem('x-combo-numerica-user')
+  return prevUser === user
+}
+
 export const isEndCombo = () => {
   const COMBO_TIME = 5000
   const comboDate = sessionStorage.getItem('x-combo-numerica-date')
