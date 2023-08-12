@@ -1,3 +1,5 @@
+import { comboMessageList } from './common'
+
 export const isMessageNumeric = (message: string) => {
   const parsed = parseInt(message)
   return !isNaN(parsed)
@@ -42,4 +44,8 @@ export const highScore = (): number => {
 export const highScoreUser = (): string | null => {
   const highScoreUser = sessionStorage.getItem('x-highScore-numerica-user')
   return highScoreUser ? highScoreUser :null
+}
+
+export const isComboMessage = (message: string) => {
+  return comboMessageList.includes(message)
 }

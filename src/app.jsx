@@ -6,7 +6,7 @@ import { onMessage, removeMessageListener } from '../utils/twitch-connection'
 import { Game } from './components/game'
 import { InitialConfiguration } from './components/initial-configuration'
 import { useNumerica } from './hooks/use-numerica'
-import { setHighScore, isMessageNumeric, messageToNumber, nextNumber } from '../utils/numerica-logic'
+import { setHighScore, isMessageNumeric, messageToNumber, nextNumber, isComboMessage } from '../utils/numerica-logic'
 
 export function App() {
   const [match, params] = useRoute("/channel/:channelName")
@@ -29,7 +29,12 @@ export function App() {
 
   const handleNewMessage = (channel, user, message, self) => {
 console.log('handleNewMessage', channel, user, message, self)
-    if(!isMessageNumeric(message)) return
+    if(!isMessageNumeric(message)) {
+      if(isComboMessage(message)) {
+        setCurrentCombo(currentCombo + 1)
+        return
+      }
+    }
     
     const hit = messageToNumber(message)
     if(hit === nextNumber(currentNumber, currentCombo)){
