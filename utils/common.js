@@ -1,5 +1,6 @@
 export const comboMessageList = [
   'rothioStabanim',
+  'rothioCuchillo',
   'afordiThinking',
   'psuzumPokerface',
   'ildesiChurro',
