@@ -14,6 +14,26 @@ Existen emotes en donde puedes agregar un Combo al siguiente número. Por ejempl
 
 Con esto se incrementará el HightScore más rápido. Pero ojo, no dura mucho tiempo. Así que date prisa y suma muchos puntos.
 
+Estos son los emotes que puedes usar para incrementar el combo:
+
+- ![rothioStabanim](./src/assets/combo-emotes/rothioStabanim.gif) `rothioStabanim`
+- ![afordiThinking](./src/assets/combo-emotes/afordiThinking.gif) `afordiThinking`
+- ![psuzumPokerface](./src/assets/combo-emotes/psuzumPokerface.gif) `psuzumPokerface`
+- ![ildesiChurro](./src/assets/combo-emotes/ildesiChurro.gif) `ildesiChurro`
+- ![altaskCode](./src/assets/combo-emotes/altaskCode.gif) `altaskCode`
+- ![meleni4CABREADO](./src/assets/combo-emotes/meleni4CABREADO.gif) `meleni4CABREADO`
+- ![algebr3Driver](./src/assets/combo-emotes/algebr3Driver.gif) `algebr3Driver`
+- ![carmen67Jeje](./src/assets/combo-emotes/carmen67Jeje.gif) `carmen67Jeje`
+- ![sensei9Facepalm](./src/assets/combo-emotes/sensei9Facepalm.gif) `sensei9Facepalm`
+- ![catisa1Demon](./src/assets/combo-emotes/catisa1Demon.gif) `catisa1Demon`
+- ![ransilMAL](./src/assets/combo-emotes/ransilMAL.gif) `ransilMAL`
+- ![niv3keTodook](./src/assets/combo-emotes/niv3keTodook.gif) `niv3keTodook`
+- ![isaacs1Leak](./src/assets/combo-emotes/isaacs1Leak.gif) `isaacs1Leak`
+- ![papajo8Heart](./src/assets/combo-emotes/papajo8Heart.gif) `papajo8Heart`
+- ![kerk11F](./src/assets/combo-emotes/kerk11F.gif) `kerk11F`
+- ![lascosJoserragetotal](./src/assets/combo-emotes/lascosJoserragetotal.gif) `lascosJoserragetotal`
+  
+
 ## 🔧 ¿Como configurar?
 
 Para configurar el juego tienes dos opciones accediendo desde [la web](https://numerica-combo-game.vercel.app/).
