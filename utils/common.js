@@ -15,4 +15,5 @@ export const comboMessageList = [
   'isaacs1Leak',
   'papajo8Heart',
   'kerk11F',
+  'lascosJoserragetotal',
 ]
